@@ -1,0 +1,14 @@
+{% extends 'fuel/base.html' %}
+{% block title %}Supprimer le tuyaux de Vente{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Supprimer {{ sales.date }}</h1>
+    <p>Êtes-vous sûr de vouloir supprimer ce tuyaux de vente de cette date {{ sales.date }} ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Oui, supprimer</button>
+    </form>
+    <a href="{% url 'way_list' %}">Annuler</a>
+</div>
+{% endblock %}

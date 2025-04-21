@@ -1,0 +1,10 @@
+{% extends 'fuel/base.html' %}
+
+{% block content %}
+<h2>Ajouter une autre tuyau de vente de carburant</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enregistrer</button>
+</form>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'fuel/base.html' %}
+
+{% load humanize %}
+{% block content %}
+<h2>Liste des ventes</h2>
+<a href="{% url 'create_fuel_sale' %}" class="btn btn-primary mb-3">+ Ajouter une vente</a>
+<hr>
+{% comment %} <ul>
+    {% for s in sales %}
+    <li>{{ s.date|date:"d M Y" }} - {{ s.client }} : {{ s.quantity_liters }} L à {{ s.price_per_liter }} F/L ({{ s.total_price }} F)</li>
+    {% endfor %}
+</ul> {% endcomment %}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Client</th>
+            <th>Quantité en (L)</th>
+            <th>Prix par litre</th>
+            <th>Prix Total</th>
+            <th>Date de Vente</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in sales %}
+        <tr>
+            <td>{{ s.client }}</td>
+            <td>{{ s.quantity_liters|intcomma }}</td>
+            <td>{{ s.price_per_liter|intcomma }}</td>
+            <td>{{ s.total_price|intcomma }}</td>
+            <td>{{ s.date }}</td>
+            <td>
+                <a href="{% url 'update_fuel_sale' s.id %}" class="btn btn-sm btn-warning">Modifier</a>
+                <a href="{% url 'delete_fuel_sale' s.id %}" class="btn btn-sm btn-danger">Supprimer</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">Aucun vente effectué pour l'instant.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<nav aria-label="Pagination des lapins">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Précédent</a>
+        </li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Suivant</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}

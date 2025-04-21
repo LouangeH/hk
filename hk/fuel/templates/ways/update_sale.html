@@ -1,0 +1,14 @@
+{% extends 'fuel/base.html' %}
+{% block title %}Modifier le tuyau de vente{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Modifier le Tuyaux de vente</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Modifier</button>
+    </form>
+    <a href="{% url 'way_list' %}">Retour à la liste</a>
+</div>
+{% endblock %}

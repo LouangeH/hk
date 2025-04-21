@@ -1,0 +1,14 @@
+{% extends 'fuel/base.html' %}
+{% block title %}Supprimer la Vente{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Supprimer {{ sales.date }}</h1>
+    <p>Êtes-vous sûr de vouloir supprimer le carburant vendu a cette date du {{ sales.date }} ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Oui, supprimer</button>
+    </form>
+    <a href="{% url 'fuel_sale_list' %}">Annuler</a>
+</div>
+{% endblock %}

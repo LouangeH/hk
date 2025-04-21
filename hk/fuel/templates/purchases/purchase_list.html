@@ -1,0 +1,62 @@
+{% extends 'fuel/base.html' %}
+
+{% load humanize %}
+{% block content %}
+<h2>Liste des achats</h2>
+<a href="{% url 'create_fuel_purchase' %}" class="btn btn-primary mb-3">+ Ajouter un achat</a>
+<hr>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Station</th>
+            <th>Quantité en (L)</th>
+            <th>Prix par litre</th>
+            <th>Prix Total</th>
+            <th>Date d'Achat</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in purchases %}
+        <tr>
+            <td>{{ s.supplier }}</td>
+            <td>{{ s.quantity_liters|intcomma}}</td>
+            <td>{{ s.price_per_liter|intcomma }}</td>
+            <td>{{ s.total_cost|intcomma }}</td>
+            <td>{{ s.date }}</td>
+            <td>
+                <a href="{% url 'update_fuel_purchase' s.id %}" class="btn btn-sm btn-warning">Modifier</a>
+                <a href="{% url 'delete_fuel_purchase' s.id %}" class="btn btn-sm btn-danger">Supprimer</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">Aucun Achat effectué pour l'instant.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<nav aria-label="Pagination des lapins">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Précédent</a>
+        </li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Suivant</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}

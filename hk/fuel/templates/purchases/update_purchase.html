@@ -1,0 +1,14 @@
+{% extends 'fuel/base.html' %}
+{% block title %}Modifier l'achat{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Modifier l'achat</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Modifier</button>
+    </form>
+    <a href="{% url 'fuel_purchase_list' %}">Retour à la liste</a>
+</div>
+{% endblock %}

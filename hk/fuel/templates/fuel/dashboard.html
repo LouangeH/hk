@@ -1,0 +1,164 @@
+{% extends 'fuel/base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center text-primary fw-bold mb-4">Bienvenue dans le Système de Gestion de HK</h1>
+    <p class="text-center text-muted">Gérez efficacement vos achats, vos ventes ainsi que vos dépenses.</p>
+
+    <div class="row mt-4">
+        <!-- Colonne LITRES -->
+        <div class="col-md-6">
+            <div class="card shadow mb-4 border-info">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-info">Nombre de litres achetés</h5>
+                    <p class="display-4 text-info">{{ litre_achats|intcomma }} L</p>
+                    <i class="fas fa-gas-pump fa-2x text-info"></i>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4 border-success">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success">Nombre de litres vendus</h5>
+                    <p class="display-4 text-success">{{ litre_vendus|intcomma }} L</p>
+                    <i class="fas fa-tint fa-2x text-success"></i>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4 border-warning">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-warning">Litres en stock</h5>
+                    <p class="display-4 text-warning">{{ stock|intcomma }} L</p>
+                    <i class="fas fa-warehouse fa-2x text-warning"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Colonne FINANCIÈRE -->
+        <div class="col-md-6">
+            <div class="card shadow mb-4 border-primary">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">Somme des achats</h5>
+                    <p class="display-4 text-primary">{{ total_achats|intcomma }} FBu</p>
+                    <i class="fas fa-shopping-cart fa-2x text-primary"></i>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4 border-success">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success">Somme des ventes</h5>
+                    <p class="display-4 text-success">{{ total_ventes|intcomma }} FBu</p>
+                    <i class="fas fa-hand-holding-usd fa-2x text-success"></i>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4 border-danger">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-danger">Dépenses associées</h5>
+                    <p class="display-4 text-danger">{{ total_depenses|intcomma }} FBu</p>
+                    <i class="fas fa-money-bill-wave fa-2x text-danger"></i>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4 border-dark">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-dark">Bénéfice / Perte</h5>
+                    <p class="display-4">
+                        {% if benefice >= 0 %}
+                            <span style="color:green;">+{{ benefice|intcomma }} FBu</span>
+                            <i class="fas fa-arrow-up fa-2x text-success"></i>
+                        {% else %}
+                            <span style="color:red;">{{ benefice|intcomma }} FBu</span>
+                            <i class="fas fa-arrow-down fa-2x text-danger"></i>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% comment %} {% block content %}
+
+<div class="container mt-4">
+    <!-- Titre et message de bienvenue -->
+    <h1 class="text-center text-primary fw-bold mb-4">
+        Bienvenue dans le Système de Gestion de HK
+    </h1>
+    <p class="text-center text-muted">Gérez efficacement vos Achats, vos Ventes ainsi que vos depenses.</p>
+
+    <!-- Statistiques générales -->
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card shadow border-primary">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">Nombre de litre Achetés</h5>
+                    <p class="display-4 text-primary">{{ litre_achats }} litres </p>
+                    <i class="fas fa-paw fa-2x text-primary"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow border-success">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success">Nombre de litre Vendus</h5>
+                    <p class="display-4 text-success">{{ litre_vendus }} litres</p>
+                    <i class="fas fa-baby fa-2x text-success"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow border-warning">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-warning">Nombre de litre disponible en stock</h5>
+                    <p class="display-4 text-warning">{{ stock }} litres</p>
+                    <i class="fas fa-venus-mars fa-2x text-warning"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow border-info">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-info">Somme d'Achats</h5>
+                    <p class="display-4 text-info">{{ total_achats }} Fbu</p>
+                    <i class="fas fa-prescription-bottle-alt fa-2x text-info"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow border-success">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success">Somme Vendus</h5>
+                    <p class="display-4 text-success">{{ total_ventes }} FBu</p>
+                    <i class="fas fa-baby fa-2x text-success"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow border-warning">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-warning">Depenses associés</h5>
+                    <p class="display-4 text-warning">{{ total_depenses }} FBu</p>
+                    <i class="fas fa-venus-mars fa-2x text-warning"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow border-primary">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">Bénéfice / Perte :</h5>
+                    <p class="display-4 text-primary">{% if benefice >= 0 %}
+                        <span style="color:green;">+{{ benefice }} FBu</span>
+                    {% else %}
+                        <span style="color:red;">-{{ benefice }} FBu</span>
+                    {% endif %}</p>
+                    <i class="fas fa-paw fa-2x text-primary"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %} {% endcomment %}
