@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import pymysql
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+pymysql.install_as_MySQLdb()
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +28,7 @@ SECRET_KEY = 'django-insecure-bm7b(%vf@%8i!fm!y1!cex!m1dy*(@9i9nt&xherdn49yz)u+t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,8 +79,15 @@ WSGI_APPLICATION = 'hk.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ipsdibur_fuel',  # Nom de ta base MySQL
+        'USER': 'ipsdibur_root',  # Nom d'utilisateur MySQL
+        'PASSWORD': 'ipsdiburundi', 
+        'HOST': '',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
@@ -101,6 +111,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Web site Security
+SECURE_SSL_REDIRECT = True  # Redirige HTTP vers HTTPS
+SESSION_COOKIE_SECURE = True  # Protège les cookies
+CSRF_COOKIE_SECURE = True  # Empêche l'accès CSRF en HTTP
+X_FRAME_OPTIONS = "DENY"  # Empêche l'inclusion du site dans un iframe
+SECURE_HSTS_SECONDS = 31536000  # Active HSTS pour un an
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
