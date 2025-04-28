@@ -1,5 +1,5 @@
 from django.urls import path
-from fuel.views import achat,depense,vente, accueil, way, user
+from fuel.views import achat,depense,vente, accueil, way, user, bank
 
 urlpatterns = [
     path('', accueil.dashboard, name='dashboard'),
@@ -30,4 +30,9 @@ urlpatterns = [
     path('user/', user.user_list, name='user_list'),
     path('modifier-user/<int:pk>/', user.edit_user, name='update_user'),
     path('supprimer-user/<int:pk>/', user.delete_user, name='delete_user'),
+
+    path('banque/', bank.bank_operation_list, name='bankoperation_list'),
+    path('banque/ajouter/', bank.create_bank_operation, name='bankoperation_create'),
+    path('banque/modifier/<int:pk>/', bank.update_bank_operation, name='bankoperation_update'),
+    path('banque/supprimer/<int:pk>/', bank.delete_bank_operation, name='bankoperation_delete'),
 ]

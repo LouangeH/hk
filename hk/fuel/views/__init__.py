@@ -4,3 +4,4 @@ from .depense import *
 from .vente import *
 from .way import *
 from .user import *
+from .bank import *

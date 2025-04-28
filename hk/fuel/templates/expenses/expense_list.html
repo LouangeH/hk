@@ -19,7 +19,7 @@
         <tr>
             <td>{{ s.description }}</td>
             <td>{{ s.amount|intcomma }}</td>
-            <td>{{ s.date }}</td>
+            <td>{{ s.date|naturaltime }}</td>
             <td>
                 <a href="{% url 'update_expense' s.id %}" class="btn btn-sm btn-warning">Modifier</a>
                 <a href="{% url 'delete_expense' s.id %}" class="btn btn-sm btn-danger">Supprimer</a>

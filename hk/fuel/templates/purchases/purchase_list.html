@@ -24,7 +24,7 @@
             <td>{{ s.quantity_liters|intcomma}}</td>
             <td>{{ s.price_per_liter|intcomma }}</td>
             <td>{{ s.total_cost|intcomma }}</td>
-            <td>{{ s.date }}</td>
+            <td>{{ s.date|naturaltime }}</td>
             <td>
                 <a href="{% url 'update_fuel_purchase' s.id %}" class="btn btn-sm btn-warning">Modifier</a>
                 <a href="{% url 'delete_fuel_purchase' s.id %}" class="btn btn-sm btn-danger">Supprimer</a>

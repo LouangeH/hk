@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from fuel.forms import ExpenseForm
 from fuel.models import Expense
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 @login_required
 def create_expense(request):
@@ -13,8 +14,11 @@ def create_expense(request):
 
 @login_required
 def expense_list(request):
-    expenses = Expense.objects.all()
-    return render(request, 'expenses/expense_list.html', {'expenses': expenses})
+    expenses = Expense.objects.all().order_by('-date')
+    paginator = Paginator(expenses, 10)  # 10 achats par page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'expenses/expense_list.html', {'expenses': expenses, 'page_obj': page_obj})
 
 @login_required
 def edit_expense(request, pk):

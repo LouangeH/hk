@@ -76,6 +76,60 @@
                 </div>
             </div>
         </div>
+        <!-- Opérations Bancaires -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card shadow border-primary mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-primary">
+                            <i class="fas fa-university me-2"></i> Solde en Banque
+                        </h5>
+                        <p class="display-6 text-primary">{{ solde_banque|intcomma }} FBu</p>
+                    </div>
+                </div>
+
+                <div class="card shadow border-warning mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-warning">
+                            <i class="fas fa-arrow-down me-2"></i> Total Dépôts
+                        </h5>
+                        <p>{{ total_depots|intcomma }} FBu</p>
+                    </div>
+                </div>
+
+                <div class="card shadow border-danger mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-danger">
+                            <i class="fas fa-arrow-up me-2"></i> Total Retraits
+                        </h5>
+                        <p>{{ total_retraits|intcomma }} FBu</p>
+                    </div>
+                </div>
+
+                <div class="card shadow border-secondary mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-muted">
+                            <i class="fas fa-receipt me-2"></i> Frais Tenue Compte
+                        </h5>
+                        <p>{{ total_tenue|intcomma }} FBu</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow border-success mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-success">
+                            <i class="fas fa-wallet me-2"></i> Solde en Caisse
+                        </h5>
+                        <p class="display-6 text-success">{{ solde_caisse|intcomma }} FBu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            
+        </div>
     </div>
 </div>
 {% endblock %}

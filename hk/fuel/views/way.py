@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from fuel.forms import WayForm
 from fuel.models import Way
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 @login_required
 def create_way(request):
@@ -13,8 +14,11 @@ def create_way(request):
 
 @login_required
 def list_way(request):
-    sales = Way.objects.all()
-    return render(request, 'ways/sale_list.html', {'sales': sales})
+    sales = Way.objects.all().order_by('-date')
+    paginator = Paginator(sales, 10)  # 10 achats par page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'ways/sale_list.html', {'page_obj': page_obj,'sales': sales})
 
 @login_required
 def edit_way(request, pk):
